@@ -17,15 +17,15 @@ I use the [sanitize] gem and generally it's great. However, it's performance can
 In my informal testing, this gem is about ~50x faster than the [sanitize] gem when generating plain text.
 
 Warming up --------------------------------------
-            Sanitize    96.000  i/100ms
-    Trenni::Sanitize     4.447k i/100ms
+						Sanitize    96.000  i/100ms
+		Trenni::Sanitize     4.447k i/100ms
 Calculating -------------------------------------
-            Sanitize    958.020  (± 4.5%) i/s -      4.800k in   5.020564s
-    Trenni::Sanitize     44.718k (± 4.2%) i/s -    226.797k in   5.080756s
+						Sanitize    958.020  (± 4.5%) i/s -      4.800k in   5.020564s
+		Trenni::Sanitize     44.718k (± 4.2%) i/s -    226.797k in   5.080756s
 
 Comparison:
-    Trenni::Sanitize:    44718.1 i/s
-            Sanitize:      958.0 i/s - 46.68x  slower
+		Trenni::Sanitize:    44718.1 i/s
+						Sanitize:      958.0 i/s - 46.68x  slower
 
 ## Installation
 
@@ -51,20 +51,14 @@ You can extract text using something similar to the following parser delegate:
 
 ```ruby
 class Text < Trenni::Sanitize::Filter
-	def filter(tag)
-		# Filter out all tags
-		return false
+	def filter(node)
+		skip!(TAG)
 	end
 	
 	def doctype(string)
 	end
 	
 	def instruction(string)
-	end
-	
-	def text(string)
-		# Output all text
-		@output << string
 	end
 end
 
@@ -88,11 +82,12 @@ class Fragment < Trenni::Sanitize::Filter
 		'a' => ['href', 'target']
 	}.freeze
 	
-	def filter(tag)
-		if attributes = ALLOWED_TAGS[tag.name]
-			tag.attributes.slice!(attributes)
-			
-			return tag
+	def filter(node)
+		if attributes = ALLOWED_TAGS[node.name]
+			node.tag.attributes.slice!(attributes)
+		else
+			# Skip the tag, and all contents
+			skip!(ALL)
 		end
 	end
 	
