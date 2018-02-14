@@ -56,5 +56,11 @@ RSpec.describe Trenni::Sanitize::Fragment do
 		
 		expect(fragment.output).to be == "x&amp;y"
 	end
+	
+	it "should include nested img" do
+		fragment = described_class.parse("<table><img src='foo'/></table>")
+		
+		expect(fragment.output).to be == "<img src=\"foo\"/>"
+	end
 end
 

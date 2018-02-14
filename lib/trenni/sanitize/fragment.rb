@@ -49,7 +49,9 @@ module Trenni
 			
 			def filter(node)
 				if attributes = ALLOWED_TAGS[node.name]
-					node.tag.attributes.slice!(attributes)
+					node.tag.attributes.slice!(*attributes)
+					
+					node.accept!
 				else
 					node.skip!
 				end

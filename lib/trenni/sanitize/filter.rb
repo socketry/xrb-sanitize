@@ -59,6 +59,10 @@ module Trenni
 					(self.skip & mode) == mode
 				end
 				
+				def accept!(mode = ALL)
+					self.skip &= ~mode
+				end
+				
 				def [] key
 					self.tag.attributes[key]
 				end
