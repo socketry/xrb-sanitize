@@ -86,18 +86,29 @@ module Trenni
 			# The current node being parsed.
 			attr :current
 			
+			attr :stack
+			
 			def top
 				@stack.last || @top
 			end
 			
 			def parse!(input)
+				parse_begin
+				
 				Trenni::Parsers.parse_markup(input, self, @entities)
 				
+				parse_end
+				
+				return self
+			end
+			
+			def parse_begin
+			end
+			
+			def parse_end
 				while @stack.size > 1
 					close_tag(@stack.last.name)
 				end
-				
-				return self
 			end
 			
 			def open_tag_begin(name, offset)
