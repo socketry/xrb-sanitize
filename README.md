@@ -16,6 +16,7 @@ I use the [sanitize] gem and generally it's great. However, it's performance can
 
 In my informal testing, this gem is about ~50x faster than the [sanitize] gem when generating plain text.
 
+```
 Warming up --------------------------------------
 						Sanitize    96.000  i/100ms
 		Trenni::Sanitize     4.447k i/100ms
@@ -26,6 +27,7 @@ Calculating -------------------------------------
 Comparison:
 		Trenni::Sanitize:    44718.1 i/s
 						Sanitize:      958.0 i/s - 46.68x  slower
+```
 
 ## Installation
 
