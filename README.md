@@ -1,16 +1,19 @@
-# trenni-sanitize::Sanitize
+# Trenni::Sanitize
 
-Sanitize markup by adding, changing or removing tags. 
+Sanitize markup by adding, changing or removing tags, using the [trenni] stream processor (which has a naive C implementation).
 
 [![Build Status](https://secure.travis-ci.org/ioquatix/trenni-sanitize.svg)](http://travis-ci.org/ioquatix/trenni-sanitize)
 [![Code Climate](https://codeclimate.com/github/ioquatix/trenni-sanitize.svg)](https://codeclimate.com/github/ioquatix/trenni-sanitize)
 [![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-sanitize/badge.svg)](https://coveralls.io/r/ioquatix/trenni-sanitize)
 
+[trenni]: https://github.com/ioquatix/trenni
+
 ## Motivation
 
-I use the [sanitize] gem and generally it's great. However, it's performance can be an issue and additionally, it doesn't preserve tag namespaces when parsing fragments due to how Nokogiri works internally.
+I use the [sanitize] gem and generally it's great. However, it's performance can be an issue and additionally, it doesn't preserve tag namespaces when parsing fragments due to how Nokogiri works internally. This is a problem when processing content destined for [utopia] since it heavily depends on tag namespaces.
 
 [sanitize]: https://github.com/rgrove/sanitize/
+[utopia]: https://github.com/ioquatix/utopia
 
 ## Is it fast?
 
