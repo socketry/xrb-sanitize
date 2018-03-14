@@ -83,13 +83,13 @@ class Fragment < Trenni::Sanitize::Filter
 		'em' => [],
 		'strong' => [],
 		'p' => [],
-		'img' => [] + ['src', 'alt', 'width', 'height'],
-		'a' => ['href', 'target']
+		'img' => ['src', 'alt', 'width', 'height'],
+		'a' => ['href']
 	}.freeze
 	
 	def filter(node)
 		if attributes = ALLOWED_TAGS[node.name]
-			node.tag.attributes.slice!(attributes)
+			node.tag.attributes.slice!(*attributes)
 		else
 			# Skip the tag, and all contents
 			skip!(ALL)
