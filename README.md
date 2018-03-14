@@ -18,15 +18,15 @@ In my informal testing, this gem is about ~50x faster than the [sanitize] gem wh
 
 ```
 Warming up --------------------------------------
-						Sanitize    96.000  i/100ms
+			Sanitize    96.000  i/100ms
 		Trenni::Sanitize     4.447k i/100ms
 Calculating -------------------------------------
-						Sanitize    958.020  (± 4.5%) i/s -      4.800k in   5.020564s
+			Sanitize    958.020  (± 4.5%) i/s -      4.800k in   5.020564s
 		Trenni::Sanitize     44.718k (± 4.2%) i/s -    226.797k in   5.080756s
 
 Comparison:
 		Trenni::Sanitize:    44718.1 i/s
-						Sanitize:      958.0 i/s - 46.68x  slower
+			Sanitize:      958.0 i/s - 46.68x  slower
 ```
 
 ## Installation
