@@ -57,7 +57,7 @@ You can extract text using something similar to the following parser delegate:
 ```ruby
 class Text < Trenni::Sanitize::Filter
 	def filter(node)
-		skip!(TAG)
+		node.skip!(TAG)
 	end
 	
 	def doctype(string)
@@ -92,7 +92,7 @@ class Fragment < Trenni::Sanitize::Filter
 			node.tag.attributes.slice!(*attributes)
 		else
 			# Skip the tag, and all contents
-			skip!(ALL)
+			node.skip!(ALL)
 		end
 	end
 	
