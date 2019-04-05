@@ -18,8 +18,8 @@ RSpec.describe Trenni::Sanitize do
 		
 		text = buffer.read
 		
-		puts Sanitize.fragment(text).inspect
-		puts Trenni::Sanitize::Text.parse(buffer).output.inspect
+		# puts Sanitize.fragment(text).inspect
+		# puts Trenni::Sanitize::Text.parse(buffer).output.inspect
 		
 		Benchmark.ips do |x|
 			x.report("Sanitize") do
