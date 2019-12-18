@@ -23,11 +23,28 @@ require_relative 'filter'
 module Trenni
 	module Sanitize
 		class Text < Filter
+			CLOSING = {
+				"p" => "\n\n",
+				"div" => "\n\n",
+			}
+			
 			def filter(node)
+				if node.name == "br"
+					text("\n\n")
+				end
+				
 				if node.name == 'script'
 					node.skip!(ALL) # Skip everything including content.
 				else
 					node.skip!(TAG) # Only skip the tag output, but not the content.
+				end
+			end
+			
+			def close_tag(name, offset = nil)
+				super
+				
+				if value = CLOSING[name]
+					text(value)
 				end
 			end
 			
