@@ -2,7 +2,7 @@
 
 Sanitize markup by adding, changing or removing tags, using the [trenni] stream processor (which has a naive C implementation).
 
-[![Build Status](https://secure.travis-ci.org/ioquatix/trenni-sanitize.svg)](http://travis-ci.org/ioquatix/trenni-sanitize)
+[![Build Status](https://travis-ci.com/ioquatix/trenni-sanitize.svg)](https://travis-ci.com/ioquatix/trenni-sanitize)
 [![Code Climate](https://codeclimate.com/github/ioquatix/trenni-sanitize.svg)](https://codeclimate.com/github/ioquatix/trenni-sanitize)
 [![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-sanitize/badge.svg)](https://coveralls.io/r/ioquatix/trenni-sanitize)
 
