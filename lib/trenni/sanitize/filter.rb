@@ -64,7 +64,7 @@ module Trenni
 				end
 				
 				def [] key
-					self.tag.attributes[key]
+					self.tag&.attributes[key]
 				end
 			end
 			
