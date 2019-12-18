@@ -4,7 +4,7 @@ require "rspec/core/rake_task"
 # Load all rake tasks:
 import(*Dir.glob('tasks/**/*.rake'))
 
-RSpec::Core::RakeTask.new(:test)
+RSpec::Core::RakeTask.new
 
 task :environment do
 	$LOAD_PATH.unshift File.expand_path('lib', __dir__)
@@ -16,4 +16,4 @@ task :console => :environment do
 	Pry.start
 end
 
-task :default => :test
+task :default => :spec

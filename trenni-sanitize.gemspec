@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "trenni", '~> 3.5'
 	
 	spec.add_development_dependency "covered"
-	spec.add_development_dependency "bundler", "~> 1.3"
+	spec.add_development_dependency "bundler"
 	spec.add_development_dependency "rspec", "~> 3.4"
 	spec.add_development_dependency "rake"
 end
