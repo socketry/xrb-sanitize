@@ -66,6 +66,10 @@ module Trenni
 				def [] key
 					self.tag&.attributes[key]
 				end
+				
+				def limit_attributes(keys)
+					self.tag&.attributes&.select!{|key, value| keys.include?(key)}
+				end
 			end
 			
 			def initialize(output, entities)

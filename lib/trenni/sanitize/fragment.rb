@@ -20,10 +20,12 @@
 
 require_relative 'filter'
 
+require 'set'
+
 module Trenni
 	module Sanitize
 		class Fragment < Filter
-			STANDARD_ATTRIBUTES = ['class', 'style'].freeze
+			STANDARD_ATTRIBUTES = Set.new(['class', 'style']).freeze
 			
 			ALLOWED_TAGS = {
 				'div' => STANDARD_ATTRIBUTES,
@@ -49,7 +51,7 @@ module Trenni
 			
 			def filter(node)
 				if attributes = ALLOWED_TAGS[node.name]
-					node.tag.attributes.slice!(*attributes)
+					node.limit_attributes(attributes)
 					
 					node.accept!
 				else
