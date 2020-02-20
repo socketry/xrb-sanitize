@@ -116,11 +116,11 @@ module Trenni
 				
 				@current = Node.new(name, tag, current.skip)
 			end
-
+			
 			def attribute(key, value)
 				@current.tag.attributes[key] = value
 			end
-
+			
 			def open_tag_end(self_closing)
 				if self_closing
 					@current.tag.closed = true
@@ -135,7 +135,7 @@ module Trenni
 				# If the tag was self-closing, it's no longer current at this point, we are back in the context of the parent tag.
 				@current = self.top if self_closing
 			end
-
+			
 			def close_tag(name, offset = nil)
 				while node = @stack.pop
 					node.tag.write_closing_tag(@output) unless node.skip? TAG
@@ -153,19 +153,19 @@ module Trenni
 			def doctype(string)
 				@output << string unless current.skip? DOCTYPE
 			end
-
+			
 			def comment(string)
 				@output << string unless current.skip? COMMENT
 			end
-
+			
 			def instruction(string)
 				@output << string unless current.skip? INSTRUCTION
 			end
-
+			
 			def cdata(string)
 				@output << string unless current.skip? CDATA
 			end
-
+			
 			def text(string)
 				Markup.append(@output, string) unless current.skip? TEXT
 			end
