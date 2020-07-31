@@ -45,6 +45,12 @@ RSpec.describe Trenni::Sanitize::Fragment do
 		expect(fragment.output).to be == "<p>Hello World</p>"
 	end
 	
+	it "should allow list items" do
+		input = "<ul><li>Hello World</li></ul>"
+		fragment = described_class.parse(input)
+		expect(fragment.output).to be == input
+	end
+	
 	it "should include trailing text" do
 		fragment = described_class.parse("Hello<script/>World")
 		
