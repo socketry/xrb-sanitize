@@ -1,25 +1,18 @@
 # Trenni::Sanitize
 
-Sanitize markup by adding, changing or removing tags, using the [trenni] stream processor (which has a naive C implementation).
+Sanitize markup by adding, changing or removing tags, using the [trenni](https://github.com/ioquatix/trenni) stream processor (which has a naive C implementation).
 
-[![Build Status](https://travis-ci.com/ioquatix/trenni-sanitize.svg)](https://travis-ci.com/ioquatix/trenni-sanitize)
-[![Code Climate](https://codeclimate.com/github/ioquatix/trenni-sanitize.svg)](https://codeclimate.com/github/ioquatix/trenni-sanitize)
-[![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-sanitize/badge.svg)](https://coveralls.io/r/ioquatix/trenni-sanitize)
-
-[trenni]: https://github.com/ioquatix/trenni
+[![Development Status](https://github.com/ioquatix/trenni-sanitize/workflows/Development/badge.svg)](https://github.com/ioquatix/trenni-sanitize/actions?workflow=Development)
 
 ## Motivation
 
-I use the [sanitize] gem and generally it's great. However, it's performance can be an issue and additionally, it doesn't preserve tag namespaces when parsing fragments due to how Nokogiri works internally. This is a problem when processing content destined for [utopia] since it heavily depends on tag namespaces.
-
-[sanitize]: https://github.com/rgrove/sanitize/
-[utopia]: https://github.com/ioquatix/utopia
+I use the [sanitize](https://github.com/rgrove/sanitize/) gem and generally it's great. However, it's performance can be an issue and additionally, it doesn't preserve tag namespaces when parsing fragments due to how Nokogiri works internally. This is a problem when processing content destined for [utopia](https://github.com/ioquatix/utopia) since it heavily depends on tag namespaces.
 
 ## Is it fast?
 
-In my informal testing, this gem is about ~50x faster than the [sanitize] gem when generating plain text.
+In my informal testing, this gem is about \~50x faster than the [sanitize](https://github.com/rgrove/sanitize/) gem when generating plain text.
 
-```
+~~~
 Warming up --------------------------------------
 			Sanitize    96.000  i/100ms
 		Trenni::Sanitize     4.447k i/100ms
@@ -30,21 +23,21 @@ Calculating -------------------------------------
 Comparison:
 		Trenni::Sanitize:    44718.1 i/s
 			Sanitize:      958.0 i/s - 46.68x  slower
-```
+~~~
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-	gem 'trenni-sanitize'
+    gem 'trenni-sanitize'
 
 And then execute:
 
-	$ bundle
+    $ bundle
 
 Or install it yourself as:
 
-	$ gem install trenni-sanitize
+    $ gem install trenni-sanitize
 
 ## Usage
 
@@ -54,7 +47,7 @@ Or install it yourself as:
 
 You can extract text using something similar to the following parser delegate:
 
-```ruby
+``` ruby
 class Text < Trenni::Sanitize::Filter
 	def filter(node)
 		node.skip!(TAG)
@@ -75,7 +68,7 @@ text = Text.parse("<p>Hello World</p>").output
 
 Here is a simple filter that only allows a limited set of tags:
 
-```ruby
+``` ruby
 class Fragment < Trenni::Sanitize::Filter
 	STANDARD_ATTRIBUTES = ['class'].freeze
 	
@@ -104,15 +97,15 @@ class Fragment < Trenni::Sanitize::Filter
 end
 ```
 
-As you can see, while [sanitize] is driven by configuration, `Trenni::Sanitize::Filter` is driven by code.
+As you can see, while [sanitize](https://github.com/rgrove/sanitize/) is driven by configuration, `Trenni::Sanitize::Filter` is driven by code.
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1.  Fork it
+2.  Create your feature branch (`git checkout -b my-new-feature`)
+3.  Commit your changes (`git commit -am 'Add some feature'`)
+4.  Push to the branch (`git push origin my-new-feature`)
+5.  Create new Pull Request
 
 ## License
 

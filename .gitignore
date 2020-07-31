@@ -3,7 +3,7 @@
 .bundle
 .config
 .yardoc
-Gemfile.lock
+/gems.locked
 InstalledFiles
 _yardoc
 coverage
@@ -16,4 +16,4 @@ test/tmp
 test/version_tmp
 tmp
 
-lib/trenni/trenni.bundle
+.rspec_status

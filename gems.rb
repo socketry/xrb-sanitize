@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in trenni.gemspec
 gemspec
 
-group :development do
-	gem 'pry'
+group :maintenance, optional: true do
+	gem "bake-modernize"
+	gem "bake-bundler"
 end
 
 group :test do
