@@ -6,14 +6,14 @@
 require 'xrb/sanitize/filter'
 
 describe XRB::Sanitize::Filter::Node do
-	describe '#limit_attributes' do
+	with '#limit_attributes' do
 		let(:tag) {XRB::Tag.new("img", true, {"src" => "image.jpg", "onclick" => "alert()"})}
-		subject {XRB::Sanitize::Filter::Node.new("image", tag, 0)}
+		let(:node) {XRB::Sanitize::Filter::Node.new("image", tag, 0)}
 		
 		it "can limit attributes" do
-			subject.limit_attributes("src")
+			node.limit_attributes("src")
 			
-			expect(subject.tag.attributes).to be == {"src" => "image.jpg"}
+			expect(node.tag.attributes).to be == {"src" => "image.jpg"}
 		end
 	end
 end

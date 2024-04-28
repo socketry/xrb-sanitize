@@ -15,13 +15,11 @@ group :maintenance, optional: true do
 end
 
 group :test do
-	gem 'ruby-prof', platforms: [:mri]
+	gem "sus"
+	gem "covered"
+	
 	gem "benchmark-ips"
 	
 	# For comparisons:
 	gem "sanitize"
 end
-
-# Moved Development Dependencies
-gem "covered"
-gem "rspec", "~> 3.4"
