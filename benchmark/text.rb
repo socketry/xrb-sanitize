@@ -1,11 +1,11 @@
+# frozen_string_literal: true
 
 require 'sanitize'
 require 'benchmark/ips'
+require 'xrb/sanitize/text'
 
-require 'trenni/sanitize/text'
-
-RSpec.describe Trenni::Sanitize do
-	let(:buffer) {Trenni::Buffer.load_file(File.join(__dir__, "sample.html"))}
+describe XRB::Sanitize do
+	let(:buffer) {XRB::Buffer.load_file(File.join(__dir__, "sample.html"))}
 	
 	it "should be faster than alternatives" do
 		config = Sanitize::Config.freeze_config(
@@ -19,15 +19,15 @@ RSpec.describe Trenni::Sanitize do
 		text = buffer.read
 		
 		# puts Sanitize.fragment(text).inspect
-		# puts Trenni::Sanitize::Text.parse(buffer).output.inspect
+		# puts XRB::Sanitize::Text.parse(buffer).output.inspect
 		
 		Benchmark.ips do |x|
 			x.report("Sanitize") do
 				Sanitize.fragment text
 			end
 			
-			x.report("Trenni::Sanitize") do
-				Trenni::Sanitize::Text.parse(buffer)
+			x.report("XRB::Sanitize") do
+				XRB::Sanitize::Text.parse(buffer)
 			end
 			
 			x.compare!

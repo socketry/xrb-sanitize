@@ -1,11 +1,17 @@
+# frozen_string_literal: true
+
+# Released under the MIT License.
+# Copyright, 2018-2024, by Samuel Williams.
+
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in trenni.gemspec
 gemspec
 
 group :maintenance, optional: true do
+	gem "bake-gem"
 	gem "bake-modernize"
-	gem "bake-bundler"
+	
+	gem "utopia-project"
 end
 
 group :test do
@@ -15,3 +21,7 @@ group :test do
 	# For comparisons:
 	gem "sanitize"
 end
+
+# Moved Development Dependencies
+gem "covered"
+gem "rspec", "~> 3.4"

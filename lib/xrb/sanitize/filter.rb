@@ -1,28 +1,13 @@
-# Copyright, 2018, by Samuel G. D. Williams. <http://www.codeotaku.com>
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# frozen_string_literal: true
 
-require 'trenni/parsers'
-require 'trenni/builder'
-require 'trenni/entities'
+# Released under the MIT License.
+# Copyright, 2018-2024, by Samuel Williams.
 
-module Trenni
+require 'xrb/parsers'
+require 'xrb/builder'
+require 'xrb/entities'
+
+module XRB
 	module Sanitize
 		# Provides a high level interface for parsing markup.
 		class Filter
@@ -37,9 +22,9 @@ module Trenni
 			CONTENT = DOCTYPE | COMMENT | INSTRUCTION | CDATA | TEXT
 			ALL = TAG | CONTENT
 			
-			def self.parse(input, output = nil, entities = Trenni::Entities::HTML5)
+			def self.parse(input, output = nil, entities = XRB::Entities::HTML5)
 				# This allows us to handle passing in a string:
-				input = Trenni::Buffer(input)
+				input = XRB::Buffer(input)
 				
 				output ||= MarkupString.new.force_encoding(input.encoding)
 				
@@ -99,7 +84,7 @@ module Trenni
 			def parse!(input)
 				parse_begin
 				
-				Trenni::Parsers.parse_markup(input, self, @entities)
+				XRB::Parsers.parse_markup(input, self, @entities)
 				
 				parse_end
 				
