@@ -12,90 +12,23 @@ I use the [sanitize](https://github.com/rgrove/sanitize/) gem and generally it's
 
 In my informal testing, this gem is about \~50x faster than the [sanitize](https://github.com/rgrove/sanitize/) gem when generating plain text.
 
+    ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x86_64-linux]
     Warming up --------------------------------------
-    			Sanitize    96.000  i/100ms
-    		XRB::Sanitize     4.447k i/100ms
+                Sanitize   438.000 i/100ms
+           XRB::Sanitize     7.935k i/100ms
     Calculating -------------------------------------
-    			Sanitize    958.020  (± 4.5%) i/s -      4.800k in   5.020564s
-    		XRB::Sanitize     44.718k (± 4.2%) i/s -    226.797k in   5.080756s
+                Sanitize      4.365k (± 0.1%) i/s -     21.900k in   5.017157s
+           XRB::Sanitize     78.670k (± 0.1%) i/s -    396.750k in   5.043233s
     
     Comparison:
-    		XRB::Sanitize:    44718.1 i/s
-    			Sanitize:      958.0 i/s - 46.68x  slower
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'xrb-sanitize'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install xrb-sanitize
+           XRB::Sanitize:    78669.9 i/s
+                Sanitize:     4365.0 i/s - 18.02x  slower
 
 ## Usage
 
-`XRB::Sanitize::Delegate` is a stream-based processor. That means it parses the incoming markup and makes decisions about what to keep and what to discard during parsing.
+Please see the [project documentation](https://socketry.github.io/xrb-sanitize/) for more details.
 
-### Extracting Text
-
-You can extract text using something similar to the following parser delegate:
-
-``` ruby
-class Text < XRB::Sanitize::Filter
-	def filter(node)
-		node.skip!(TAG)
-	end
-	
-	def doctype(string)
-	end
-	
-	def instruction(string)
-	end
-end
-
-text = Text.parse("<p>Hello World</p>").output
-# => "Hello World"
-```
-
-### Extracting Safe Markup
-
-Here is a simple filter that only allows a limited set of tags:
-
-``` ruby
-class Fragment < XRB::Sanitize::Filter
-	STANDARD_ATTRIBUTES = ['class'].freeze
-	
-	ALLOWED_TAGS = {
-		'em' => [],
-		'strong' => [],
-		'p' => [],
-		'img' => ['src', 'alt', 'width', 'height'],
-		'a' => ['href']
-	}.freeze
-	
-	def filter(node)
-		if attributes = ALLOWED_TAGS[node.name]
-			node.tag.attributes.slice!(*attributes)
-		else
-			# Skip the tag, and all contents
-			node.skip!(ALL)
-		end
-	end
-	
-	def doctype(string)
-	end
-	
-	def instruction(string)
-	end
-end
-```
-
-As you can see, while [sanitize](https://github.com/rgrove/sanitize/) is driven by configuration, `XRB::Sanitize::Filter` is driven by code.
+  - [Getting Started](https://socketry.github.io/xrb-sanitize/guides/getting-started/index) - This guide explains how to get started with the `XRB::Sanitize` gem.
 
 ## Contributing
 
