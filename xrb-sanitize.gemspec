@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
 	spec.name = "xrb-sanitize"
 	spec.version = XRB::Sanitize::VERSION
 	
-	spec.summary = "Sanitize markdown according to a set of rules."
+	spec.summary = "Sanitize markup according to a set of rules."
 	spec.authors = ["Samuel Williams"]
 	spec.license = "MIT"
 	
